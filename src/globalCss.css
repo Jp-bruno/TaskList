@@ -1,0 +1,35 @@
+/* Global CSS*/
+
+@import url('./css/cssVariables.css');
+
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@100;200;300;400;500;600;700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Raleway', sans-serif;
+}
+
+.App {
+    height: 100vh;
+    background-color: var(--primaria);
+}
+
+button {
+    cursor: pointer;
+}
+
+#wrapper {
+    border: solid 5px var(--secundaria);
+    border-radius: 7px;
+    box-shadow: 0px 0px 20px var(--secundaria);
+    height: 80vh;
+    width: 90%;
+    margin:  auto;
+    display: grid;
+    overflow-y: hidden;
+    grid-template-columns: 30% 70%;
+    transform: translateY(10%);
+}
+

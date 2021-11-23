@@ -1,0 +1,81 @@
+@import url('./cssVariables.css');
+
+#taskSection {
+    display: flex;
+    flex-direction: column;
+}
+
+textarea {
+    width: 100%;
+    height: 100%;
+    padding: 10px;
+    background: none;
+    color: var(--quaternaria);
+    resize: none;
+    border: none;
+    outline: none;
+    font-size: 20px;
+}
+
+#taskSettingsOnDisplay {
+    padding: 15px 5px;
+    display: grid;
+    grid-auto-flow: column;
+    place-items: center;
+    width: 100%;
+    box-shadow: inset 0px 12px 50px #6830c327;
+    border-top: solid 2px var(--secundaria);
+}
+
+#taskTimeData {
+    flex-grow: 1;
+    padding: 10px 4px;
+    color: white;
+}
+
+#taskTimeData p {
+    margin: 10px 4px;
+}
+
+#taskTimeData p span {
+    color: var(--quaternaria);
+}
+
+#saveOrComplete {
+    display: flex;
+}
+
+#saveOrComplete button {
+    flex-grow: 1;
+    padding: 10px;
+    margin: 6px;
+    font-weight: 500;
+    background: rgba(0,0,0,0);
+    font-size: large;
+    transition: 300ms color ease, 300ms box-shadow ease, 300ms border-color ease;
+    border-radius: 7px;
+}
+
+#saveButton {
+    border: solid 3px var(--saveButtonFontColor);
+    color: var(--saveButtonFontColor);
+}
+
+#completeTaskButton {
+    border: solid 3px var(--completeTaskButtonFontColor);
+    color: var(--completeTaskButtonFontColor);
+}
+
+#saveButton:hover {
+    border: solid 3px var(--tercearia);
+    box-shadow: 0px 0px 10px var(--tercearia);
+    color: var(--tercearia);
+    background: #f5f3f40c;
+}
+
+#completeTaskButton:hover {
+    border: solid 3px var(--verdeTom1);
+    box-shadow: 0px 0px 10px var(--verdeTom1);
+    color: var(--verdeTom1);
+    background: #81b9182a;
+}
