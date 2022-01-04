@@ -5,7 +5,7 @@ import { useContext } from 'react';
 import { listContext } from "../../context/listContext";
 
 
-export default function ListItem({ children, indexId }) {
+export default function ListItem({ children, indexId, complete }) {
     const [state, setState] = useState({
         editMode: false,
     })
@@ -60,7 +60,7 @@ export default function ListItem({ children, indexId }) {
 
     return (
         <>
-            <li className={`listItem`} id={`item${indexId}`} key={indexId}>
+            <li className={`listItem ${complete ? 'completed' : ''}`} id={`item${indexId}`} key={indexId}>
                 {
                     state.editMode ?
                         <>
@@ -70,7 +70,7 @@ export default function ListItem({ children, indexId }) {
                         <>
                             <p id={`titulo${indexId}`} onClick={context.selectItem}>{children}</p>
                             <div id='editOrRemoveDiv'>
-                                <EditItemTitle indexId={indexId} changeMode={changeMode} />
+                                {complete ? null : <EditItemTitle indexId={indexId} changeMode={changeMode} />}
                                 <RemoveItem indexId={indexId} />
                             </div>
                         </>

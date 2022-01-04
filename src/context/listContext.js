@@ -80,6 +80,10 @@ export default function ListContextProvider({ children }) {
             return
         }
 
+        if (state.someSelected) { //para nao perder o que foi escrito antes de mudar para outro item sem ter salvo
+            updateItemDescription();
+        }
+
         let index = state.items.findIndex(el => el.titulo === (ev.target ? ev.target.innerText : ev));
 
         let componentReference = document.getElementById('item' + index);
@@ -146,10 +150,8 @@ export default function ListContextProvider({ children }) {
 
     function completeTask() {
         let itemIndex = state.items.findIndex(el => el.titulo === state.selectedItem.titulo);
-
-        let selectedItem = document.getElementById('item' + itemIndex);
-
-        selectedItem.classList.add('completed');
+        
+        updateItemDescription();
 
         let newArray = state.items.map(el => {
             if (el.titulo === state.selectedItem.titulo) {

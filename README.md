@@ -21,15 +21,23 @@ O que falta:
 8. criar botao para exibir apenas tarefas concluídas - A FAZER
 
 
-BREAKPOINTS:
+English
 
-    max-width: 950px;
-    max-width: 500px; 
-----------------------
+Objective: create a basic task manager
 
-Cada tarefa é composta por:
+    This project was built with ReactJS. 
+    
+    I used react context API to storage the list items and pass the list methods.
 
-Um título,
-Uma descrição,
-Uma data de criação,
-Uma data de conclusão
+    The user should be able to:
+
+    - Create tasks with:
+        - Title
+        - Description
+        - Creation date and time
+        - Conclusion date and time
+    - Click the "Complete Task" to mark a task as complete
+    - Click the pencil icon to edit a task title
+    - Click the X icon to delete a task (complete or not)
+    - Click the "Save" button to save changes in the task description
+    - Edit a non-complete task description

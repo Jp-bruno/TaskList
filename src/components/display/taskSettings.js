@@ -3,7 +3,7 @@ import CompleteTask from "./completeTaskButton";
 import { useContext, useState } from "react";
 import { listContext } from "../../context/listContext";
 
-export default function TaskSettings({ disableSaveButton, hasChange, hasCompleted, disableCompleteButton }) {
+export default function TaskSettings({ disableSaveButton, hasChange }) {
     const context = useContext(listContext);
 
     return (
@@ -12,7 +12,7 @@ export default function TaskSettings({ disableSaveButton, hasChange, hasComplete
                 <div id='taskTimeData'>
                     <p>Criado em: <span>{context.selectedItem.dataInicio[0]}</span> {context.selectedItem.dataInicio[1] ? 'às' : ''} <span>{context.selectedItem.dataInicio[1]}</span></p>
                     {
-                        hasCompleted ?
+                        context.selectedItem.complete ?
                             <p>Finalizado em: <span>{context.selectedItem.dataFinal[0]}</span> {context.selectedItem.dataFinal[1] ? 'às' : ''} <span>{context.selectedItem.dataFinal[1]}</span></p>
                             :
                             null
@@ -20,7 +20,7 @@ export default function TaskSettings({ disableSaveButton, hasChange, hasComplete
                 </div>
 
                 {
-                    hasCompleted ?
+                    context.selectedItem.complete ?
                         null
                         :
                         <div id='saveOrComplete'>

@@ -4,45 +4,31 @@ import TaskSettings from "./taskSettings";
 
 
 export default function TaskDisplay() {
-    const context = useContext(listContext);
-
     const [state, setState] = useState({
         contentChanged: false,
-        hasCompleted: false
     })
+
+    const context = useContext(listContext);
 
     function watchChange() {
         setState({
-            ...state,
             contentChanged: true
         })
     }
 
     function disableSaveButton() {
         setState({
-            ...state,
             contentChanged: false
         })
     }
 
-    function disableCompleteButton() {
-        setState({
-            ...state,
-            hasCompleted: true
-        })
+    function isReadOnly() {
+        return context.selectedItem.complete ? true : false;
     }
 
-    useEffect(() => {
-        return context.someSelected ?
-        setState({
-            hasCompleted: context.selectedItem.complete,
-            contentChanged: false
-        })
-
-        :
-
-        () => {}
-    }, [context.selectedItem, context.someSelected ? context.selectedItem.complete : null])
+    useEffect(() => { //faz o botao de salvar sumir quando outra tarefa é selecionada no meio de uma edição de descrição de tarefa
+        return context.someSelected ? disableSaveButton() : () => { }
+    }, [context.selectedItem, context.someSelected])
 
     return (
         <>
@@ -51,16 +37,15 @@ export default function TaskDisplay() {
                     onChange={watchChange}
                     id='taskDescriptionArea'
                     placeholder={(context.selectedItem ? 'Descreva sua tarefa.' : 'Selecione uma tarefa.')}
-                    readOnly={(context.someSelected ? false : true)}
+                    readOnly={context.someSelected ? isReadOnly() : true}
                 />
 
                 {
                     context.someSelected ?
                         <TaskSettings
                             hasChange={state.contentChanged}
-                            hasCompleted={state.hasCompleted}
                             disableSaveButton={disableSaveButton}
-                            disableCompleteButton={disableCompleteButton} />
+                        />
                         :
                         null
                 }

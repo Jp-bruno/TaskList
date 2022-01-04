@@ -14,10 +14,8 @@ export default function List() {
                         return (
                             <ListItem
                                 key={index}
-                                selectItem={context.selectItem}
-                                removeItem={context.removeItem}
-                                editItem={context.editItem}
                                 indexId={index}
+                                complete={el.complete ? true : false}
                             >
                                 {el.titulo}
                             </ListItem>
