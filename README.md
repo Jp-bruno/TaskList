@@ -1,41 +1,30 @@
 Objetivo: criar um task manager
 
-O que falta:
-
-1. criar botao para excluir tarefa - FEITO
-
-2. criar botao para editar titulo da tarefa - FEITO
-    2.1 - Lembrar de retornar ao titulo antigo caso a operaçao de mudança de titulo de tarefa queira ser cancelada -- FEITO
-
-3. criar funçao para editar descrição da tarefa - FEITO
-    3.1 criar botao para salvar alterações feitas na descrição - FEITO
-
-4. criar botao para marcar tarefa como concluída - FEITO
-
-5. criar a função que adiciona a tarefa à lista de concluidas - FEITO
-
-6. adicionar detalhes de data da criação da tarefa (dia/mes/ano - hora:minuto) - FEITO
-
-7. salvar as tarefas no localstorage do navegador - A FAZER
-
-8. criar botao para exibir apenas tarefas concluídas - A FAZER
-
+    Esse projeto foi construído usando ReactJS.
+    O usuário deve ser capaz de:
+    
+    - Criar tarefas com:
+        - Título
+        - Descrição
+        - Data e hora de criação e conclusão
+    - Clicar no botao "Completar tarefa" para marcar uma tarefa como concluída
+    - Clicar no ícone de lápis para editar o título de uma tarefa
+    - Clicar no ícone X para deletar uma tarefa (completa ou não)
+    - Clicar no botão "Salvar" para salvar mudanças na descrição da tarefa
+    - Editar uma tarefa não completa
+       
 
 English
 
 Objective: create a basic task manager
 
     This project was built with ReactJS. 
-    
-    I used react context API to storage the list items and pass the list methods.
-
     The user should be able to:
 
     - Create tasks with:
         - Title
         - Description
-        - Creation date and time
-        - Conclusion date and time
+        - Creation and conclusion date and time
     - Click the "Complete Task" to mark a task as complete
     - Click the pencil icon to edit a task title
     - Click the X icon to delete a task (complete or not)
