@@ -1,7 +1,6 @@
 import RemoveItem from './removeItem';
 import EditItemTitle from './editItemTitle';
-import { useState } from 'react';
-import { useContext } from 'react';
+import { useState, useContext, useRef } from 'react';
 import { listContext } from "../../context/listContext";
 
 
@@ -9,68 +8,57 @@ export default function ListItem({ children, indexId, complete }) {
     const [state, setState] = useState({
         editMode: false,
     })
-
+    
+    const ItemRef = useRef();
+    const InputRef = useRef();
+    
     const context = useContext(listContext)
+    
+    function toggleEditMode() {
+        setState({
+            editMode: !(state.editMode)
+        })
+    }
 
-    function changeMode(ev) {
+    function handleInput(ev) {
         if (ev.key === 'Enter' && state.editMode) {
-            let input = document.getElementById(`newTitleInput${indexId}`);
-
-            if (input.value === '') {
+            if (InputRef.current.value === '') {
+                toggleEditMode();
                 return
             }
 
-            setState({
-                ...state,
-                editMode: !(state.editMode)
-            })
+            context.updateItemTitle(InputRef.current.value);
+            toggleEditMode();
 
-            context.updateItemTitle(ev)
-        } else
-
-            if (ev.key === 'Escape' && state.editMode) {
-                console.log(context.selectItem.titulo)
-
-                setState({
-                    ...state,
-                    editMode: false
-                })
-            } else
-
-                if (ev.type === 'click' && state.editMode == false) {
-                    let itemTitle = document.getElementById(`titulo${indexId}`).innerText;
-
-                    context.selectItem(itemTitle)
-
-                    setTimeout(() => document.getElementById(`newTitleInput${indexId}`).focus(), 50)
-
-                    setState({
-                        ...state,
-                        editMode: !(state.editMode)
-                    })
-                } else
-
-                    if (ev.type === 'blur') {
-                        setState({
-                            ...state,
-                            editMode: !(state.editMode)
-                        })
-                    }
+        } else if ((ev.key === 'Escape' && state.editMode) || ev.type === 'blur') {
+            toggleEditMode();
+        }
     }
+
+    function select() {
+        context.selectItem(children, ItemRef.current)
+    }
+
+    function enterEditMode() {
+        select();
+        toggleEditMode();
+        setTimeout(() => {InputRef.current.focus()}, 50);
+    }
+
 
     return (
         <>
-            <li className={`listItem ${complete ? 'completed' : ''}`} id={`item${indexId}`} key={indexId}>
+            <li className={`listItem ${complete ? 'completed' : ''}`} id={`item${indexId}`} key={indexId} ref={ItemRef}>
                 {
                     state.editMode ?
                         <>
-                            <input maxLength={50} id={`newTitleInput${indexId}`} className='newTitleInput' onKeyDown={changeMode} onBlur={changeMode} />
+                            <input maxLength={50} id={`newTitleInput${indexId}`} className='newTitleInput' ref={InputRef} onKeyDown={handleInput} onBlur={toggleEditMode} />
                         </>
                         :
                         <>
-                            <p id={`titulo${indexId}`} onClick={context.selectItem}>{children}</p>
+                            <p id={`titulo${indexId}`} onClick={select}>{children}</p>
                             <div id='editOrRemoveDiv'>
-                                {complete ? null : <EditItemTitle indexId={indexId} changeMode={changeMode} />}
+                                {complete ? null : <EditItemTitle indexId={indexId} enterEditMode={enterEditMode} />}
                                 <RemoveItem indexId={indexId} />
                             </div>
                         </>

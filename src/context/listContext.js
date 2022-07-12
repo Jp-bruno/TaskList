@@ -70,29 +70,25 @@ export default function ListContextProvider({ children }) {
             someSelected: newItemsArray.length === 0 ? false : true
         })
 
-        writeOnDisplay(newItemsArray.length === 0 ? '' : newItemsArray[newItemsArray.length - 1].descricao);
+        writeOnDisplay('');
     }
 
-    function selectItem(ev) {
-        let oItem = state.items.find(el => el.titulo === (ev.target ? ev.target.innerText : ev));
-
-        if (state.someSelected && (state.selectedItem.titulo === oItem.titulo)) {
+    function selectItem(text, itemReference) {
+        if (state.selectedItem?.titulo === text) {
             return
         }
+
+        let oItem = state.items.find(el => el.titulo === text);
 
         if (state.someSelected) { //para nao perder o que foi escrito antes de mudar para outro item sem ter salvo
             updateItemDescription();
         }
 
-        let index = state.items.findIndex(el => el.titulo === (ev.target ? ev.target.innerText : ev));
-
-        let componentReference = document.getElementById('item' + index);
-
         let allListItems = Array.from(document.querySelectorAll('.listItem'));
 
-        allListItems.forEach(el => el.classList.contains('selected') ? el.classList.remove('selected') : () => {})
+        allListItems.forEach(el => el.classList.contains('selected') ? el.classList.remove('selected') : () => { })
 
-        componentReference.classList.add('selected')
+        itemReference.classList.add('selected')
 
         setState({
             ...state,
@@ -103,26 +99,21 @@ export default function ListContextProvider({ children }) {
         writeOnDisplay(oItem.descricao)
     }
 
-    function updateItemTitle(ev) {
-        if (ev.key === 'Escape') {
-            return
-        } else {
-            let newArray = state.items.map((el, index) => {
-                let input = document.getElementById(`newTitleInput${index}`);
+    function updateItemTitle(newTitle) {
+        let newArray = state.items.map((el) => {
+            if (el.titulo === state.selectedItem.titulo) {
+                el.titulo = newTitle
+                return el
+            } else {
+                return el
+            }
+        })
 
-                if (el.titulo === state.selectedItem.titulo) {
-                    el.titulo = input.value
-                    return el
-                } else {
-                    return el
-                }
-            })
+        setState({
+            ...state,
+            items: newArray
+        })
 
-            setState({
-                ...state,
-                items: newArray
-            })
-        }
     }
 
     function updateItemDescription() {
@@ -138,7 +129,7 @@ export default function ListContextProvider({ children }) {
                 }
                 return el
             })
-    
+
             setState({
                 ...state,
                 items: newArray
@@ -150,7 +141,7 @@ export default function ListContextProvider({ children }) {
 
     function completeTask() {
         let itemIndex = state.items.findIndex(el => el.titulo === state.selectedItem.titulo);
-        
+
         updateItemDescription();
 
         let newArray = state.items.map(el => {

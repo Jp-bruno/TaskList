@@ -1,7 +1,7 @@
-export default function EditItemTitle({indexId, changeMode}) {
+export default function EditItemTitle({indexId, enterEditMode}) {
     
     return(
-        <button id={'edit' + indexId} onClick={changeMode}>
+        <button id={'edit' + indexId} onClick={enterEditMode}>
             <svg width="26" height="22" viewBox="0 0 26 22" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path strokeWidth='2' d="M8.17896 20.9416H25.2432M15.9462 2.54879L19.3842 5.9868M2.34135 14.8764L16.0627 1.15499C16.8438 0.373937 18.1101 0.373936 18.8912 1.15498L20.4872 2.75102C21.2682 3.53207 21.2682 4.7984 20.4872 5.57945L6.77665 19.29C6.65685 19.4098 2.87073 20.0848 1.47829 20.1308C1.09116 20.1436 1.04264 19.7983 1.12278 19.4193L1.92273 15.6369C1.9598 15.4616 2.01537 15.2887 2.11826 15.142C2.18469 15.0473 2.25931 14.9584 2.34135 14.8764Z" stroke="rgba(255,255,255,0.5)"/>
             </svg>
