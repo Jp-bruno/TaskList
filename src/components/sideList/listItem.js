@@ -1,21 +1,21 @@
 import RemoveItem from './removeItem';
 import EditItemTitle from './editItemTitle';
-import { useState, useContext, useRef } from 'react';
+import { useState, useContext, useRef, useEffect } from 'react';
 import { listContext } from "../../context/listContext";
-
 
 export default function ListItem({ children, indexId, complete }) {
     const [state, setState] = useState({
-        editMode: false,
+        editMode: false
     })
-    
+
     const ItemRef = useRef();
     const InputRef = useRef();
-    
+
     const context = useContext(listContext)
-    
+
     function toggleEditMode() {
         setState({
+            ...state,
             editMode: !(state.editMode)
         })
     }
@@ -42,7 +42,7 @@ export default function ListItem({ children, indexId, complete }) {
     function enterEditMode() {
         select();
         toggleEditMode();
-        setTimeout(() => {InputRef.current.focus()}, 50);
+        setTimeout(() => { InputRef.current.focus() }, 50);
     }
 
 
@@ -57,7 +57,7 @@ export default function ListItem({ children, indexId, complete }) {
                         :
                         <>
                             <p id={`titulo${indexId}`} onClick={select}>{children}</p>
-                            <div id='editOrRemoveDiv'>
+                            <div id='editOrRemoveDiv' className={complete ? 'complete' : null}>
                                 {complete ? null : <EditItemTitle indexId={indexId} enterEditMode={enterEditMode} />}
                                 <RemoveItem indexId={indexId} />
                             </div>

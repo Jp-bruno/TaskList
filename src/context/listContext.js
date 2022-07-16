@@ -8,7 +8,8 @@ export default function ListContextProvider({ children }) {
         items: [new ItemProps('Encontro com aliens', 'Ser abduzido', '', getFullDate())],
         selectedItem: null,
         someSelected: false,
-        completedTasks: []
+        completedTasks: [],
+        modalOpen: false
     })
 
     //funções auxiliares
@@ -70,7 +71,7 @@ export default function ListContextProvider({ children }) {
             someSelected: newItemsArray.length === 0 ? false : true
         })
 
-        writeOnDisplay('');
+        writeOnDisplay();
     }
 
     function selectItem(text, itemReference) {
@@ -93,7 +94,8 @@ export default function ListContextProvider({ children }) {
         setState({
             ...state,
             selectedItem: oItem,
-            someSelected: true
+            someSelected: true,
+            modalOpen: true
         })
 
         writeOnDisplay(oItem.descricao)
@@ -137,8 +139,6 @@ export default function ListContextProvider({ children }) {
         }
     }
 
-    //funções para tarefas completas
-
     function completeTask() {
         let itemIndex = state.items.findIndex(el => el.titulo === state.selectedItem.titulo);
 
@@ -161,6 +161,15 @@ export default function ListContextProvider({ children }) {
         })
     }
 
+    function toggleModal() {
+        setState({
+            ...state,
+            selectedItem: null,
+            someSelected: false,
+            modalOpen: !(state.modalOpen)
+        })
+    }
+
     return (
         <listContext.Provider
             value={
@@ -168,12 +177,14 @@ export default function ListContextProvider({ children }) {
                     items: state.items,
                     selectedItem: state.selectedItem,
                     someSelected: state.someSelected,
+                    modalOpen: state.modalOpen,
                     removeItem,
                     addItem,
                     selectItem,
                     updateItemTitle,
                     updateItemDescription,
-                    completeTask
+                    completeTask,
+                    toggleModal
                 }
             }>
             {children}

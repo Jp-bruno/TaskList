@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import List from "./components/sideList/list";
 import TaskDisplay from "./components/display/taskDisplay";
 import { useState, useContext } from 'react';

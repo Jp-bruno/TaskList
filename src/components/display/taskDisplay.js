@@ -12,12 +12,14 @@ export default function TaskDisplay() {
 
     function watchChange() {
         setState({
+            ...state,
             contentChanged: true
         })
     }
 
     function disableSaveButton() {
         setState({
+            ...state,
             contentChanged: false
         })
     }
@@ -28,15 +30,20 @@ export default function TaskDisplay() {
 
     useEffect(() => { //faz o botao de salvar sumir quando outra tarefa é selecionada no meio de uma edição de descrição de tarefa
         return context.someSelected ? disableSaveButton() : () => { }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [context.selectedItem, context.someSelected])
 
     return (
         <>
-            <section id='taskSection'>
+            <section id='taskSection' className={`${context.modalOpen ? 'modal_open' : 'modal_closed'}`}>
+                <button className='close_modal_button' onClick={context.toggleModal}>
+                    X
+                </button>
+
                 <textarea
                     onChange={watchChange}
                     id='taskDescriptionArea'
-                    placeholder={(context.selectedItem ? 'Descreva sua tarefa.' : 'Selecione uma tarefa.')}
+                    placeholder={context.selectedItem?.complete ? 'Tarefa concluída!' : (context.selectedItem ? 'Descreva sua tarefa.' : 'Selecione uma tarefa.')}
                     readOnly={context.someSelected ? isReadOnly() : true}
                 />
 
@@ -52,4 +59,5 @@ export default function TaskDisplay() {
             </section>
         </>
     )
+
 }

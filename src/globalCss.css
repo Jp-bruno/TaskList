@@ -33,3 +33,19 @@ button {
     transform: translateY(10%);
 }
 
+#list {
+    overflow-y: scroll;
+    scroll-behavior: smooth;
+}
+
+@media (max-width: 700px) {
+    #wrapper {
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr;
+        height: 100vh;
+        
+        transform: translateY(0%);
+        position: relative;
+    }
+}
+

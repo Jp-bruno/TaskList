@@ -10,17 +10,17 @@ export default function TaskSettings({ disableSaveButton, hasChange }) {
         <>
             <div id='taskSettingsOnDisplay'>
                 <div id='taskTimeData'>
-                    <p>Criado em: <span>{context.selectedItem.dataInicio[0]}</span> {context.selectedItem.dataInicio[1] ? 'às' : ''} <span>{context.selectedItem.dataInicio[1]}</span></p>
+                    <p>Criado em: <span>{context.selectedItem?.dataInicio[0]}</span> {context.selectedItem?.dataInicio[1] ? 'às' : ''} <span>{context.selectedItem?.dataInicio[1]}</span></p>
                     {
-                        context.selectedItem.complete ?
-                            <p>Finalizado em: <span>{context.selectedItem.dataFinal[0]}</span> {context.selectedItem.dataFinal[1] ? 'às' : ''} <span>{context.selectedItem.dataFinal[1]}</span></p>
+                        context.selectedItem?.complete ?
+                            <p>Finalizado em: <span>{context.selectedItem?.dataFinal[0]}</span> {context.selectedItem?.dataFinal[1] ? 'às' : ''} <span>{context.selectedItem?.dataFinal[1]}</span></p>
                             :
                             null
                     }
                 </div>
 
                 {
-                    context.selectedItem.complete ?
+                    context.selectedItem?.complete ?
                         null
                         :
                         <div id='saveOrComplete'>
