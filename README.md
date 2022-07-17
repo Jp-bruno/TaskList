@@ -8,10 +8,10 @@ Objetivo: criar um task manager
         - Descrição
         - Data e hora de criação e conclusão
     - Clicar no botao "Completar tarefa" para marcar uma tarefa como concluída
-    - Clicar no ícone de lápis para editar o título de uma tarefa
+    - Clicar no ícone de lápis para editar o título de uma tarefa não completa
     - Clicar no ícone X para deletar uma tarefa (completa ou não)
     - Clicar no botão "Salvar" para salvar mudanças na descrição da tarefa
-    - Editar uma tarefa não completa
+    - Editar a descrição de uma tarefa não completa
        
 
 English
@@ -26,7 +26,7 @@ Objective: create a basic task manager
         - Description
         - Creation and conclusion date and time
     - Click the "Complete Task" to mark a task as complete
-    - Click the pencil icon to edit a task title
+    - Click the pencil icon to edit a non-complete task title
     - Click the X icon to delete a task (complete or not)
     - Click the "Save" button to save changes in the task description
     - Edit a non-complete task description
