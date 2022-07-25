@@ -17,6 +17,10 @@ export default function TaskDisplay() {
         })
     }
 
+    function isReadOnly() {
+        return context.selectedItem.complete ? true : false;
+    }
+
     function disableSaveButton() {
         setState({
             ...state,
@@ -24,13 +28,10 @@ export default function TaskDisplay() {
         })
     }
 
-    function isReadOnly() {
-        return context.selectedItem.complete ? true : false;
-    }
-
     useEffect(() => { //faz o botao de salvar sumir quando outra tarefa é selecionada no meio de uma edição de descrição de tarefa
-        return context.someSelected ? disableSaveButton() : () => { }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
+        let a = disableSaveButton()
+        return context.someSelected ? a : () => { }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [context.selectedItem, context.someSelected])
 
     return (

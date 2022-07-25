@@ -5,7 +5,7 @@ export const listContext = createContext({});
 
 export default function ListContextProvider({ children }) {
     const [state, setState] = useState({
-        items: [new ItemProps('Encontro com aliens', 'Ser abduzido', '', getFullDate())],
+        items: [],
         selectedItem: null,
         someSelected: false,
         completedTasks: [],
@@ -21,11 +21,11 @@ export default function ListContextProvider({ children }) {
     }
 
     function getFullDate() {
-        let today = new Date()
+        const today = new Date()
 
-        let dayMonthYear = today.toLocaleDateString()
+        const dayMonthYear = today.toLocaleDateString()
 
-        let hourMin = today.toTimeString().slice(0, 8)
+        const hourMin = today.toTimeString().slice(0, 8)
 
         return [dayMonthYear, hourMin]
     }
@@ -34,7 +34,7 @@ export default function ListContextProvider({ children }) {
 
     function addItem(ev) {
         if (ev.key === 'Enter') {
-            let input = document.getElementById('newTaskInput');
+            const input = document.getElementById('newTaskInput');
 
             if (input.value === '' || state.items.find(el => el.titulo === input.value)) {
                 return
@@ -58,9 +58,9 @@ export default function ListContextProvider({ children }) {
     }
 
     function removeItem(ev) {
-        let targetIndex = Number(ev.target.id.slice(6));
+        const targetIndex = Number(ev.target.id.slice(6));
 
-        let newItemsArray = [...state.items];
+        const newItemsArray = [...state.items];
 
         newItemsArray.splice(targetIndex, 1);
 
@@ -74,8 +74,13 @@ export default function ListContextProvider({ children }) {
         writeOnDisplay();
     }
 
-    function selectItem(text, itemReference) {
+    function selectItem(text, itemReference, eventTargetType) {
         if (state.selectedItem?.titulo === text) {
+            setState({
+                ...state,
+                someSelected: true,
+                modalOpen: eventTargetType === 'submit' ? false : true
+            })
             return
         }
 
@@ -95,7 +100,7 @@ export default function ListContextProvider({ children }) {
             ...state,
             selectedItem: oItem,
             someSelected: true,
-            modalOpen: true
+            modalOpen: eventTargetType === 'submit' ? false : true
         })
 
         writeOnDisplay(oItem.descricao)
@@ -115,7 +120,6 @@ export default function ListContextProvider({ children }) {
             ...state,
             items: newArray
         })
-
     }
 
     function updateItemDescription() {
@@ -164,8 +168,6 @@ export default function ListContextProvider({ children }) {
     function toggleModal() {
         setState({
             ...state,
-            selectedItem: null,
-            someSelected: false,
             modalOpen: !(state.modalOpen)
         })
     }

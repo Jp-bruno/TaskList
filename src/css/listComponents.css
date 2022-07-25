@@ -128,4 +128,8 @@
         grid-template-columns: 70% 20%;
         column-gap: 10%;
     }
+
+    #editOrRemoveDiv {
+        visibility: visible;
+    }
 }
