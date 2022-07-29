@@ -1,4 +1,8 @@
-Objetivo: criar um task manager
+# Task Manager
+
+### Live preview
+
+https://jp-bruno.github.io/TaskList/
 
     Esse projeto foi construído usando ReactJS.
     O usuário deve ser capaz de:
